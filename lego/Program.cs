@@ -1,4 +1,5 @@
-﻿using lego.model;
+﻿using lego.Logic;
+using lego.model;
 
 namespace lego
 {
@@ -7,11 +8,19 @@ namespace lego
         static void Main(string[] args)
         {
             var context = new LegoContext();
-            var parts = context.LegoParts.ToList();
-            foreach (var part in parts)
+            var colorRepo = new LegoRepository<LegoColor>(context);
+            var colors = colorRepo.GetAll();
+            foreach (var color in colors)
             {
-                Console.WriteLine($"Part ID: {part.PartNum}, Name: {part.Name}");
+                Console.WriteLine($"Id: {color.Id}, Name: {color.Name}, RGB: {color.Rgb}, IsTrans: {color.IsTrans}");
             }
+            var inventoryRepo = new LegoRepository<LegoInventory>(context);
+            var inventories = inventoryRepo.GetAll();
+            foreach (var inventory in inventories)
+            {
+                Console.WriteLine($"Inventory Id: {inventory.Id}, Name: {inventory.Version}");
+            }
+
         }
     }
 }

@@ -25,12 +25,14 @@ namespace lego
 
             var crimsonColor = new LegoColor
             {
-                Name = "Crimson",
+                Name = "rosa budino",
                 Rgb = "DC143C",
                 IsTrans = 'f'
             };
 
-            uow.AddLegoColor(crimsonColor);
+            uow.AddLegoColor(crimsonColor, true);
+            uow.BeginTransaction();
+            uow.Commit();
 
             var colors = uow.GetLegoColors();
 
